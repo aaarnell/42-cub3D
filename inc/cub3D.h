@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:22:47 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/10 18:55:19 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/10 22:01:28 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define TEXT_COLOR 0x00CC0000		//Цвет текста
 
 //Символы карты допустимые
-static char	*g_str_sym = "0eECP1";
+static char	*g_str_sym = "01NSEW";
 
 //Картинки для вывода символов карты на экран
 static char	*g_pict_path[] = {
@@ -42,23 +42,21 @@ static char	*g_pict_path[] = {
 	NULL
 };
 
-//Картинки для анимации ценного предмета
-static char	*g_anm_itm_path[] = {
-	"./pict/item_0.xpm",
-	"./pict/item_1.xpm",
-	"./pict/item_2.xpm",
-	"./pict/item_3.xpm",
+//ID изображений стен, по которым программа ищет их адреса во вводном файле
+static char	*g_id_img[] = {
+	"NO",
+	"SO",
+	"WE",
+	"EA",
 	NULL
 };
 
-//Нумерованный список для символов и картинок
+//Нумерованный список id изображений стен
 enum	e_pict {
-	EMPTY,
-	ENEMY,
-	EXIT,
-	ITEM,
-	PLAYER,
-	WALL
+	NO,
+	SO,
+	WE,
+	EA
 };
 
 //Количество и последовательность элементов в переменных
@@ -98,6 +96,8 @@ typedef struct s_vars{
 	char	**map_mx;
 	int		wd;
 	int		hg;
+	int		floor_color;
+	int		ceilling_color;
 	int		wdi;
 	int		hgi;
 	int		bits_per_pixel;
@@ -113,6 +113,8 @@ typedef struct s_vars{
 	int		timer;
 }	t_vars;
 
+int		get_intro_info(int fd, t_vars *vars, char **line);
+
 int		load_imgs(t_vars *vars, void **imgs, char **pth);
 int		check_length_get_width(char *line, int *wd);
 int		cnt_chk_sym(char *line, t_vars *vars);
@@ -120,7 +122,6 @@ void	fnl_chk_sym_map(t_vars *vars);
 void	read_file(char *file, t_vars *vars);
 int		render_next_frame(t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
-int		mouse_hook(int button, int x, int y, t_vars *vars);
 int		close_prog(t_vars *vars, enum e_err	ernum);
 
 #endif

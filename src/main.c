@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:28:21 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/10 18:32:37 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/10 21:38:11 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,61 +17,71 @@ int	close_prog(t_vars *vars, enum e_err	ernum)
 	if (vars && vars->win)
 		mlx_destroy_window(vars->mlx, vars->win);
 	if (ernum)
-		printf("Error\n%s\n", g_err_str[ernum]);
+		printf("Error: %s\n", g_err_str[ernum]);
 	else if (errno && errno != 60)
-		printf("Error\n%s\n", strerror(errno));
+		printf("Error: %s\n", strerror(errno));
 	exit(errno);
 	return (0);
 }
-
+/*
 static int	cross_exit(t_vars *vars)
 {
 	close_prog(vars, NONE);
 	return (0);
 }
-
+*/
 static int	alloc_init(t_vars *vars)
 {
-	int	ln;
-	int	i;
+	// int	ln;
+	// int	i;
 
-	i = 0;
-	ln = ft_strlen(g_str_sym);
-	vars->imgs = (void **)malloc(sizeof(void *) * (ln + 1));
+	// i = 0;
+	// ln = ft_strlen(g_str_sym);
+	vars->imgs = (void **)malloc(sizeof(void *) * (sizeof(enum	e_pict) + 1));
 	if (!vars->imgs)
 		return (0);
-	vars->imgs[ln] = NULL;
-	vars->cn = (int *)malloc(sizeof(int) * ln);
-	if (!vars->cn)
-		return (0);
-	while (i < ln)
-		vars->cn[i++] = 0;
-	ln = 0;
-	while (g_anm_itm_path[ln])
-		ln++;
-	vars->anm_itm = (void **)malloc(sizeof(void *) * (ln + 1));
-	if (!vars->anm_itm)
-		return (0);
-	vars->anm_itm[ln] = NULL;
+	vars->imgs[sizeof(enum	e_pict)] = NULL;
+	// vars->cn = (int *)malloc(sizeof(int) * ln);
+	// if (!vars->cn)
+	// 	return (0);
+	// while (i < ln)
+	// 	vars->cn[i++] = 0;
+	// ln = 0;
+	// while (g_anm_itm_path[ln])
+	// 	ln++;
+	// vars->anm_itm = (void **)malloc(sizeof(void *) * (ln + 1));
+	// if (!vars->anm_itm)
+	// 	return (0);
+	// vars->anm_itm[ln] = NULL;
 	return (1);
 }
 
+
 static void	struct_init(t_vars *vars)
 {
-	vars->mlx = mlx_init();
+	//vars->mlx = mlx_init();
 	vars->win = NULL;
 	vars->img = NULL;
+	vars->map_mx = NULL;
 	vars->wd = 0;
 	vars->hg = 0;
+	vars->floor_color = 0;
+	vars->ceilling_color = 0;
 	vars->wdi = 0;
 	vars->hgi = 0;
+	vars->bits_per_pixel = 0;
+	vars->line_length = 0;
+	vars->endian = 0;
+	vars->imgs = NULL;
+	vars->anm_itm = NULL;
 	vars->ppx = 0;
 	vars->ppy = 0;
+	vars->cn = NULL;
 	vars->cnt_stp = 0;
 	vars->sgn_scr = 0;
 	vars->timer = 0;
 	if (!alloc_init(vars))
-		close_prog(NULL, ERR_ALLOC);
+	 	close_prog(NULL, ERR_ALLOC);
 }
 
 int	main(int argc, char **argv)
@@ -81,14 +91,14 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		close_prog(NULL, ERR_ARGNUM);
 	struct_init(&vars);
-	load_imgs(&vars, vars.imgs, g_pict_path);
-	load_imgs(&vars, vars.anm_itm, g_anm_itm_path);
 	read_file(argv[1], &vars);
-	vars.win = mlx_new_window(vars.mlx, vars.wd, vars.hg, "SO_LONG!");
-	vars.img = mlx_new_image(vars.mlx, vars.wd, vars.hg);
-	mlx_loop_hook(vars.mlx, render_next_frame, &vars);
-	mlx_hook (vars.win, 2, 0L, key_hook, &vars);
-	mlx_hook (vars.win, 17, 0L, cross_exit, &vars);
-	mlx_loop(vars.mlx);
+	// load_imgs(&vars, vars.imgs, g_pict_path);
+	// load_imgs(&vars, vars.anm_itm, g_anm_itm_path);
+	// vars.win = mlx_new_window(vars.mlx, vars.wd, vars.hg, "SO_LONG!");
+	// vars.img = mlx_new_image(vars.mlx, vars.wd, vars.hg);
+	// mlx_loop_hook(vars.mlx, render_next_frame, &vars);
+	// mlx_hook (vars.win, 2, 0L, key_hook, &vars);
+	// mlx_hook (vars.win, 17, 0L, cross_exit, &vars);
+	// mlx_loop(vars.mlx);
 	return (0);
 }

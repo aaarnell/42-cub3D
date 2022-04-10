@@ -6,7 +6,7 @@
 #    By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/18 19:58:43 by cnorma            #+#    #+#              #
-#    Updated: 2022/04/10 18:56:38 by aarnell          ###   ########.fr        #
+#    Updated: 2022/04/10 20:20:17 by aarnell          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ NAME 		=	cub3D
 SRC_DIR		=	./src/
 
 SRC_FILES	=	main.c	parc_map.c	check_count.c	hooks.c	\
-				load_put_img.c
+				load_put_img.c	check_file.c
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 
@@ -45,7 +45,7 @@ $(OBJ_DIR)%.o:	$(SRC_DIR)%.c $(HEADER)
 $(NAME):		$(OBJ) $(HEADER)
 				@$(MAKE) -C $(SRC_LIB)
 				@$(MAKE) -C ${SRC_MLX}
-				$(CC) $(FLAGS) $(OBJ) $(SRC_LIB)/$(LIBFT) $(SRC_MLX)/$(MLX) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+				$(CC) $(FLAGS) $(OBJ) $(SRC_LIB)/$(LIBFT) $(SRC_MLX)/$(MLX) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 $(OBJ_DIR):
 				@mkdir -p $@
