@@ -6,7 +6,7 @@
 #    By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/18 19:58:43 by cnorma            #+#    #+#              #
-#    Updated: 2022/04/10 16:20:48 by aarnell          ###   ########.fr        #
+#    Updated: 2022/04/10 18:56:38 by aarnell          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ NAME 		=	cub3D
 
 SRC_DIR		=	./src/
 
-SRC_FILES	=	main.c
+SRC_FILES	=	main.c	parc_map.c	check_count.c	hooks.c	\
+				load_put_img.c
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 
