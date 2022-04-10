@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:22:47 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/09 19:29:02 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/10 16:22:33 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 # define CUB3D_H
 
 # include "../libft/libft.h"
+# include "../minilibx_opengl_20191021/mlx.h"
 
 #endif
