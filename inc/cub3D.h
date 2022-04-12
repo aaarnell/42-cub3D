@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:22:47 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/12 19:22:54 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/12 22:38:58 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define TEXT_COLOR 0x00CC0000		//Цвет текста
 
 //Символы карты допустимые
-static char	*g_str_sym = "01NSEW";
+static char	*g_str_sym = " 01NSEW";
 
 //Картинки для вывода символов карты на экран
 static char	*g_pict_path[] = {
@@ -72,8 +72,9 @@ static char	*g_err_str[] = {
 	"There are not enough arguments in the file.",
 	"The file is missing a map.",
 	"The size of the pictures is different.",
-	"Different lengths of lines in the map file.",
-	"Invalid characters in the map file.",
+	"Invalid characters on the map layout or \
+	more than one player character.",
+	"More than one player character.",
 	"The map is not surrounded by obstacles.",
 	"There are not enough required characters or extra ones.",
 	NULL
@@ -89,7 +90,6 @@ enum	e_err {
 	ERR_ARGNMFL,
 	ERR_MISMPFL,
 	ERR_SIZIMG,
-	ERR_DIFLIN,
 	ERR_INVSYM,
 	ERR_SUROBS,
 	ERR_REQCHAR
@@ -119,11 +119,13 @@ typedef struct s_vars{
 	int		timer;
 }	t_vars;
 
-int		get_intro_info(int fd, t_vars *vars, char **line);
+int		get_imgcolor(int fd, t_vars *vars, char **line);
+void	chk_sym(char *line, t_vars *vars, int *player);
+int		chk_spcstr(t_vars *vars, char *line);
+void	final_check_map(t_vars *vars);
 
 int		load_imgs(t_vars *vars, void **imgs, char **pth);
 int		check_length_get_width(char *line, int *wd);
-int		cnt_chk_sym(char *line, t_vars *vars);
 void	fnl_chk_sym_map(t_vars *vars);
 void	read_file(char *file, t_vars *vars);
 int		render_next_frame(t_vars *vars);

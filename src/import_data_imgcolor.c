@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_file.c                                       :+:      :+:    :+:   */
+/*   import_data_imgcolor.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 20:19:37 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/12 19:28:39 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/12 19:39:26 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ static int check_fill_img_clr(t_vars *vars)
 		return (1);
 	return (0);
 }
-
-int get_intro_info(int fd, t_vars *vars, char **line)
+//возможно стоит сделать возврат void, т.к. в случае ошибок программа выходит внутри функций.
+int get_imgcolor(int fd, t_vars *vars, char **line)
 {
 	char	*ln;
 
