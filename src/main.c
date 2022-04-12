@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:28:21 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/10 21:38:11 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/12 19:09:51 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,13 @@ static int	alloc_init(t_vars *vars)
 
 	// i = 0;
 	// ln = ft_strlen(g_str_sym);
-	vars->imgs = (void **)malloc(sizeof(void *) * (sizeof(enum	e_pict) + 1));
+
+	//vars->imgs = (void **)malloc(sizeof(void *) * (sizeof(enum e_pict) + 1));
+	vars->imgs = (void **)ft_calloc(sizeof(void *), (sizeof(enum e_pict) + 1));
 	if (!vars->imgs)
 		return (0);
-	vars->imgs[sizeof(enum	e_pict)] = NULL;
+	//vars->imgs[sizeof(enum	e_pict)] = NULL;
+
 	// vars->cn = (int *)malloc(sizeof(int) * ln);
 	// if (!vars->cn)
 	// 	return (0);
@@ -65,8 +68,8 @@ static void	struct_init(t_vars *vars)
 	vars->map_mx = NULL;
 	vars->wd = 0;
 	vars->hg = 0;
-	vars->floor_color = 0;
-	vars->ceilling_color = 0;
+	vars->floor_color = -1;
+	vars->ceilling_color = -1;
 	vars->wdi = 0;
 	vars->hgi = 0;
 	vars->bits_per_pixel = 0;

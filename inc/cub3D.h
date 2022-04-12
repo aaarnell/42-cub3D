@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:22:47 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/12 15:31:44 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/12 19:22:54 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ static char	*g_err_str[] = {
 	"No errors.",
 	"Error in the number of program arguments.",
 	"Memory allocation error.",
-	"Failed to load required images or colors.",
+	"Failed to load required images of walls.",
+	"Failed to load required colors floor or ceilling.",
+	"There are not enough arguments in the file.",
+	"The file is missing a map.",
 	"The size of the pictures is different.",
 	"Different lengths of lines in the map file.",
 	"Invalid characters in the map file.",
@@ -82,6 +85,9 @@ enum	e_err {
 	ERR_ARGNUM,
 	ERR_ALLOC,
 	ERR_LOADIMG,
+	ERR_LOADCLR,
+	ERR_ARGNMFL,
+	ERR_MISMPFL,
 	ERR_SIZIMG,
 	ERR_DIFLIN,
 	ERR_INVSYM,

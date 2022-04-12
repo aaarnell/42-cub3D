@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 20:19:37 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/12 15:43:03 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/12 19:28:39 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,16 @@ static int check_import_color(t_vars *vars, char *line)
 		if (!val)
 		{
 			free(line);
-			close_prog(NULL, ERR_LOADIMG);
+			close_prog(NULL, ERR_LOADCLR);
 		}
 		rgb = ft_split(++val, ',');
+		//возможно тут нужна проверка аргументов на валидность - они должны быть цифрами
+		//а может такая проверка есть в ft_atoi
 		if (ft_arrlen(rgb) != 3)
 		{
 			free(line);
 			ft_frmtrx(rgb);
-			close_prog(NULL, ERR_LOADIMG);
+			close_prog(NULL, ERR_LOADCLR);
 		}
 		if (line[0] == 'F')
 			vars->floor_color = create_rgb(rgb);
@@ -72,12 +74,22 @@ static int check_import_color(t_vars *vars, char *line)
 	return (0);
 }
 
+static int check_fill_img_clr(t_vars *vars)
+{
+	int		i;
+
+	i = (int)sizeof(enum e_pict) - 1;
+	while (i > -1 && vars->imgs[i])
+				i--;
+	if (i != -1 || vars->floor_color == -1 || vars->ceilling_color == -1)
+		return (1);
+	return (0);
+}
+
 int get_intro_info(int fd, t_vars *vars, char **line)
 {
 	char	*ln;
-	//получим вводные данные
-	//идем по строкам
-	//проверяем - какой параметр из 6 возможных
+
 	while (ft_get_next_line(fd, &ln))
 	{
 		if (!ft_strlen(ln) || check_import_image(vars, ln) \
@@ -86,15 +98,15 @@ int get_intro_info(int fd, t_vars *vars, char **line)
 			free(ln);
 			continue ;
 		}
-		else
+		if (check_fill_img_clr(vars))
 		{
-			//здесь проверка - все ли картинки и цвета считаны
-				//если ДА, запись ln в line и выход, т.к. если все проверки выше строка не прошла, значит это начало карты
-				//если НЕТ, то вернуть ошибку
-				//остановить цикл, завершить функцию
-			;
+			free(ln);
+			close_prog(NULL, ERR_ARGNMFL);
 		}
+		*line = ln;
+		return (0);
 	}
-	//если цикл дошел до сюда, значит карты в файле нет, и он прощелкал до конца. Обработать ошибку
-	return (0);
+	free(ln);
+	close_prog(NULL, ERR_MISMPFL);
+	return (1);
 }
