@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:22:47 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/10 22:01:28 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/12 15:31:44 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static char	*g_err_str[] = {
 	"No errors.",
 	"Error in the number of program arguments.",
 	"Memory allocation error.",
-	"Failed to load required pictures.",
+	"Failed to load required images or colors.",
 	"The size of the pictures is different.",
 	"Different lengths of lines in the map file.",
 	"Invalid characters in the map file.",
