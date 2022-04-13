@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 22:10:59 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/12 22:07:42 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/13 20:10:20 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ static void add_str_to_map(t_vars *vars, char *line)
 	if (!tmp)
 	{
 		free(line);
-		close_prog(NULL, NULL);
+		close_prog(NULL, NONE);
 	}
-	ft_frmtrx(vars->map_mx);
+	if (vars->map_mx)
+		ft_frmtrx(vars->map_mx);
 	vars->map_mx = tmp;
 }
 
 static void get_map(int fd, t_vars *vars, char *line)
 {
-	int		i;
 	int		res;
 	int		player;
 
@@ -37,8 +37,9 @@ static void get_map(int fd, t_vars *vars, char *line)
 	while (res)
 	{
 		chk_sym(line, vars, &player);
-		if (!chk_spcstr(&line))
-			add_str_to_map(vars, line);
+		//if (!chk_spcstr(&line))
+		//	add_str_to_map(vars, line);
+		add_str_to_map(vars, line);
 		free(line);
 		res = ft_get_next_line(fd, &line);
 	}

@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 20:19:37 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/12 19:39:26 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/13 18:46:45 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int check_import_color(t_vars *vars, char *line)
 		rgb = ft_split(++val, ',');
 		//возможно тут нужна проверка аргументов на валидность - они должны быть цифрами
 		//а может такая проверка есть в ft_atoi
-		if (ft_arrlen(rgb) != 3)
+		if (ft_arrlen((void **)rgb) != 3)
 		{
 			free(line);
 			ft_frmtrx(rgb);

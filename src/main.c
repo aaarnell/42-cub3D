@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:28:21 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/12 19:09:51 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/13 19:54:08 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	close_prog(t_vars *vars, enum e_err	ernum)
 		printf("Error: %s\n", g_err_str[ernum]);
 	else if (errno && errno != 60)
 		printf("Error: %s\n", strerror(errno));
-	exit(errno);
+	exit(1);
 	return (0);
 }
 /*
@@ -41,7 +41,7 @@ static int	alloc_init(t_vars *vars)
 	//vars->imgs = (void **)malloc(sizeof(void *) * (sizeof(enum e_pict) + 1));
 	vars->imgs = (void **)ft_calloc(sizeof(void *), (sizeof(enum e_pict) + 1));
 	if (!vars->imgs)
-		return (0);
+		return (-1);
 	//vars->imgs[sizeof(enum	e_pict)] = NULL;
 
 	// vars->cn = (int *)malloc(sizeof(int) * ln);
@@ -56,7 +56,7 @@ static int	alloc_init(t_vars *vars)
 	// if (!vars->anm_itm)
 	// 	return (0);
 	// vars->anm_itm[ln] = NULL;
-	return (1);
+	return (0);
 }
 
 
@@ -83,8 +83,17 @@ static void	struct_init(t_vars *vars)
 	vars->cnt_stp = 0;
 	vars->sgn_scr = 0;
 	vars->timer = 0;
-	if (!alloc_init(vars))
+	if (alloc_init(vars) == -1)
 	 	close_prog(NULL, ERR_ALLOC);
+}
+
+static void print_map(char **map)
+{
+	int	v;
+
+	v = 0;
+	while (map[v])
+		ft_putendl_fd(map[v++], 1);
 }
 
 int	main(int argc, char **argv)
@@ -95,6 +104,7 @@ int	main(int argc, char **argv)
 		close_prog(NULL, ERR_ARGNUM);
 	struct_init(&vars);
 	read_file(argv[1], &vars);
+	print_map(vars.map_mx);
 	// load_imgs(&vars, vars.imgs, g_pict_path);
 	// load_imgs(&vars, vars.anm_itm, g_anm_itm_path);
 	// vars.win = mlx_new_window(vars.mlx, vars.wd, vars.hg, "SO_LONG!");

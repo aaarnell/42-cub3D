@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 22:06:26 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/12 22:35:11 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/13 20:38:57 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,31 +35,44 @@ void	chk_sym(char *line, t_vars *vars, int *player)
 	}
 }
 
-int chk_spcstr(t_vars *vars, char *line)
+static void chk_chr_arnd(char **map, int v, int h)
 {
-	int	i;
-	int	cnt_spc;
+	int	s;
+	int	c;
 
-	i = -1;
-	cnt_spc = 0;
-	while (line[++i])
+	if (v == 0 || h == 0 || !map[v + 1] || !map[v][h + 1])
+		close_prog(NULL, ERR_SUROBS);
+	s = v - 1;
+	while (s <= (v + 1))
 	{
-		if (line[i] == ' ')
-			cnt_spc++;
-	}
-	if (cnt_spc == ft_strlen(line))
-	{
-		if (vars->map_mx)
+		c = h - 1;
+		while (c <= (h + 1))
 		{
-			free(line);
-			close_prog(NULL, ERR_INVSYM);
+			if(!ft_strchr((g_str_sym + 1), map[s][c]) || map[s][c] == '\0')
+				close_prog(NULL, ERR_SUROBS);
+			c++;
 		}
-		return (1);
+		s++;
 	}
-	return (0);
 }
 
 void final_check_map(t_vars *vars)
 {
+	int	v;
+	int	h;
+	char **map;
 
+	map = vars->map_mx;
+	v = 0;
+	while (map[v])
+	{
+		h = 0;
+		while (map[v][h])
+		{
+			if (map[v][h] == '0' || ft_strchr(g_str_sym + 3, map[v][h]))
+				chk_chr_arnd(map, v, h);
+			h++;
+		}
+		v++;
+	}
 }

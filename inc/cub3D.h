@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:22:47 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/12 22:38:58 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/13 20:25:35 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,7 @@ static char	*g_err_str[] = {
 	"The file is missing a map.",
 	"The size of the pictures is different.",
 	"Invalid characters on the map layout or \
-	more than one player character.",
-	"More than one player character.",
+more than one player character.",
 	"The map is not surrounded by obstacles.",
 	"There are not enough required characters or extra ones.",
 	NULL
@@ -121,7 +120,7 @@ typedef struct s_vars{
 
 int		get_imgcolor(int fd, t_vars *vars, char **line);
 void	chk_sym(char *line, t_vars *vars, int *player);
-int		chk_spcstr(t_vars *vars, char *line);
+//int		chk_spcstr(t_vars *vars, char *line);
 void	final_check_map(t_vars *vars);
 
 int		load_imgs(t_vars *vars, void **imgs, char **pth);
