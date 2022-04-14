@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:22:47 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/13 20:25:35 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/14 21:44:11 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ typedef struct s_vars{
 	int		wd;
 	int		hg;
 	int		floor_color;
-	int		ceilling_color;
+	int		ceiling_color;
 	int		wdi;
 	int		hgi;
 	int		bits_per_pixel;
@@ -118,17 +118,14 @@ typedef struct s_vars{
 	int		timer;
 }	t_vars;
 
-int		get_imgcolor(int fd, t_vars *vars, char **line);
-void	chk_sym(char *line, t_vars *vars, int *player);
-//int		chk_spcstr(t_vars *vars, char *line);
-void	final_check_map(t_vars *vars);
-
-int		load_imgs(t_vars *vars, void **imgs, char **pth);
-int		check_length_get_width(char *line, int *wd);
-void	fnl_chk_sym_map(t_vars *vars);
 void	read_file(char *file, t_vars *vars);
-int		render_next_frame(t_vars *vars);
-int		key_hook(int keycode, t_vars *vars);
+void	chk_sym(char *line, t_vars *vars, int *player);
+int		get_imgcolor(int fd, t_vars *vars, char **line);
+void	final_check_map(t_vars *vars);
+int		render_frame(t_vars *vars);
+//int		load_imgs(t_vars *vars, void **imgs, char **pth);
+// int		render_next_frame(t_vars *vars);
+// int		key_hook(int keycode, t_vars *vars);
 int		close_prog(t_vars *vars, enum e_err	ernum);
 
 #endif

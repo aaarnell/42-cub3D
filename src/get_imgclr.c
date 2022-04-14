@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   import_data_imgcolor.c                             :+:      :+:    :+:   */
+/*   get_imgclr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 20:19:37 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/13 18:46:45 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/14 21:44:59 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int check_import_image(t_vars *vars, char *line)
 
 static int	create_rgb(char **rgb)
 {
-	return (0xFF000000 | ft_atoi(rgb[0]) << 16 | ft_atoi(rgb[1]) << 8 | ft_atoi(rgb[2]));
+	return (ft_atoi(rgb[0]) << 16 | ft_atoi(rgb[1]) << 8 | ft_atoi(rgb[2]));
 }
 
 static int check_import_color(t_vars *vars, char *line)
@@ -67,7 +67,7 @@ static int check_import_color(t_vars *vars, char *line)
 		if (line[0] == 'F')
 			vars->floor_color = create_rgb(rgb);
 		else
-			vars->ceilling_color = create_rgb(rgb);
+			vars->ceiling_color = create_rgb(rgb);
 		ft_frmtrx(rgb);
 		return (1);
 	}
@@ -80,8 +80,8 @@ static int check_fill_img_clr(t_vars *vars)
 
 	i = (int)sizeof(enum e_pict) - 1;
 	while (i > -1 && vars->imgs[i])
-				i--;
-	if (i != -1 || vars->floor_color == -1 || vars->ceilling_color == -1)
+		i--;
+	if (i != -1 || vars->floor_color == -1 || vars->ceiling_color == -1)
 		return (1);
 	return (0);
 }

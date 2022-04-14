@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:28:21 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/13 19:54:08 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/14 21:44:42 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,14 @@ static int	alloc_init(t_vars *vars)
 
 static void	struct_init(t_vars *vars)
 {
-	//vars->mlx = mlx_init();
+	vars->mlx = mlx_init();
 	vars->win = NULL;
 	vars->img = NULL;
 	vars->map_mx = NULL;
-	vars->wd = 0;
-	vars->hg = 0;
+	vars->wd = 1920;
+	vars->hg = 1080;
 	vars->floor_color = -1;
-	vars->ceilling_color = -1;
+	vars->ceiling_color = -1;
 	vars->wdi = 0;
 	vars->hgi = 0;
 	vars->bits_per_pixel = 0;
@@ -107,11 +107,11 @@ int	main(int argc, char **argv)
 	print_map(vars.map_mx);
 	// load_imgs(&vars, vars.imgs, g_pict_path);
 	// load_imgs(&vars, vars.anm_itm, g_anm_itm_path);
-	// vars.win = mlx_new_window(vars.mlx, vars.wd, vars.hg, "SO_LONG!");
-	// vars.img = mlx_new_image(vars.mlx, vars.wd, vars.hg);
-	// mlx_loop_hook(vars.mlx, render_next_frame, &vars);
+	vars.win = mlx_new_window(vars.mlx, vars.wd, vars.hg, "cub3D!");
+	//vars.img = mlx_new_image(vars.mlx, vars.wd, vars.hg);
+	mlx_loop_hook(vars.mlx, render_frame, &vars);
 	// mlx_hook (vars.win, 2, 0L, key_hook, &vars);
 	// mlx_hook (vars.win, 17, 0L, cross_exit, &vars);
-	// mlx_loop(vars.mlx);
+	mlx_loop(vars.mlx);
 	return (0);
 }
