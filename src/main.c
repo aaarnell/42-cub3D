@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:28:21 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/14 21:44:42 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/16 18:43:14 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ int	close_prog(t_vars *vars, enum e_err	ernum)
 	exit(1);
 	return (0);
 }
-/*
+
 static int	cross_exit(t_vars *vars)
 {
 	close_prog(vars, NONE);
 	return (0);
 }
-*/
+
 static int	alloc_init(t_vars *vars)
 {
 	// int	ln;
@@ -65,9 +65,10 @@ static void	struct_init(t_vars *vars)
 	vars->mlx = mlx_init();
 	vars->win = NULL;
 	vars->img = NULL;
+	vars->addr = NULL;
 	vars->map_mx = NULL;
-	vars->wd = 1920;
-	vars->hg = 1080;
+	vars->wd = WIN_WD;
+	vars->hg = WIN_HG;
 	vars->floor_color = -1;
 	vars->ceiling_color = -1;
 	vars->wdi = 0;
@@ -76,25 +77,27 @@ static void	struct_init(t_vars *vars)
 	vars->line_length = 0;
 	vars->endian = 0;
 	vars->imgs = NULL;
-	vars->anm_itm = NULL;
+	// vars->anm_itm = NULL;
 	vars->ppx = 0;
 	vars->ppy = 0;
-	vars->cn = NULL;
-	vars->cnt_stp = 0;
-	vars->sgn_scr = 0;
-	vars->timer = 0;
+	//vars->cn = NULL;
+	// vars->cnt_stp = 0;
+	// vars->sgn_scr = 0;
+	// vars->timer = 0;
+	vars->w_map = 0;
+	vars->h_map = 0;
 	if (alloc_init(vars) == -1)
 	 	close_prog(NULL, ERR_ALLOC);
 }
 
-static void print_map(char **map)
-{
-	int	v;
+// static void print_map(char **map)
+// {
+// 	int	v;
 
-	v = 0;
-	while (map[v])
-		ft_putendl_fd(map[v++], 1);
-}
+// 	v = 0;
+// 	while (map[v])
+// 		ft_putendl_fd(map[v++], 1);
+// }
 
 int	main(int argc, char **argv)
 {
@@ -104,14 +107,15 @@ int	main(int argc, char **argv)
 		close_prog(NULL, ERR_ARGNUM);
 	struct_init(&vars);
 	read_file(argv[1], &vars);
-	print_map(vars.map_mx);
+	//print_map(vars.map_mx);
 	// load_imgs(&vars, vars.imgs, g_pict_path);
 	// load_imgs(&vars, vars.anm_itm, g_anm_itm_path);
 	vars.win = mlx_new_window(vars.mlx, vars.wd, vars.hg, "cub3D!");
-	//vars.img = mlx_new_image(vars.mlx, vars.wd, vars.hg);
+	vars.img = mlx_new_image(vars.mlx, vars.wd, vars.hg);
+	vars.addr = mlx_get_data_addr(vars.img, &vars.bits_per_pixel, &vars.line_length, &vars.endian);
 	mlx_loop_hook(vars.mlx, render_frame, &vars);
-	// mlx_hook (vars.win, 2, 0L, key_hook, &vars);
-	// mlx_hook (vars.win, 17, 0L, cross_exit, &vars);
+	mlx_hook (vars.win, 2, 0L, key_hook, &vars);
+	mlx_hook (vars.win, 17, 0L, cross_exit, &vars);
 	mlx_loop(vars.mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:22:47 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/14 21:44:11 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/16 20:58:38 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,19 @@
 # include <stdio.h>
 # include <fcntl.h>		//open() и O_XXX-флаги
 
-# define REVERS_ANIM_SPD 5			//Скорость анимании 1 - самая быстрая
-# define ITER_IN_SECOND 60			//Число циклов mlx_loop примерно = секунде
-# define SEC_SHOW_SCREEN 5			//Секунд показывать финальную заставку
-# define STR_STEPS "Steps:"			//Обозначение счетчика шагов
-# define STR_WON "You won!"			//Текст заставки в случае победы
-# define STR_GAME_OVER "Game over!"	//Текст заставки в случае проигрыша
-# define TEXT_COLOR 0x00CC0000		//Цвет текста
+//# define REVERS_ANIM_SPD 5			//Скорость анимании 1 - самая быстрая
+//# define ITER_IN_SECOND 60			//Число циклов mlx_loop примерно = секунде
+//# define SEC_SHOW_SCREEN 5			//Секунд показывать финальную заставку
+//# define STR_STEPS "Steps:"			//Обозначение счетчика шагов
+//# define STR_WON "You won!"			//Текст заставки в случае победы
+//# define STR_GAME_OVER "Game over!"	//Текст заставки в случае проигрыша
+# define WIN_WD 1920				//Ширина окна в пикселях
+# define WIN_HG 1080				//Высотка окна в пикселях
+# define MAP_Z 10					//Пикселей на один элемент для миникарты
+# define M_PLR_CLR 0x00CC0000		//Цвет игрока на миникарте
+# define M_WLL_CLR 0x00FFFFFF		//Цвет стен на миникарте
+# define M_EMP_CLR 0x00000000		//Цвет пустот на миникарте
+//# define M_
 
 //Символы карты допустимые
 static char	*g_str_sym = " 01NSEW";
@@ -98,6 +104,7 @@ typedef struct s_vars{
 	void	*mlx;
 	void	*win;
 	void	*img;
+	char	*addr;
 	char	**map_mx;
 	int		wd;
 	int		hg;
@@ -109,23 +116,27 @@ typedef struct s_vars{
 	int		line_length;
 	int		endian;
 	void	**imgs;
-	void	**anm_itm;
-	int		ppx;
-	int		ppy;
-	int		*cn;
-	int		cnt_stp;
-	int		sgn_scr;
-	int		timer;
+	//void	**anm_itm;
+	float	ppx;
+	float	ppy;
+	// int		*cn;
+	// int		cnt_stp;
+	// int		sgn_scr;
+	//int		timer;
+	int		w_map;
+	int		h_map;
 }	t_vars;
 
 void	read_file(char *file, t_vars *vars);
 void	chk_sym(char *line, t_vars *vars, int *player);
 int		get_imgcolor(int fd, t_vars *vars, char **line);
 void	final_check_map(t_vars *vars);
+void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 int		render_frame(t_vars *vars);
+void	map_output(t_vars *vars);
 //int		load_imgs(t_vars *vars, void **imgs, char **pth);
 // int		render_next_frame(t_vars *vars);
-// int		key_hook(int keycode, t_vars *vars);
+int		key_hook(int keycode, t_vars *vars);
 int		close_prog(t_vars *vars, enum e_err	ernum);
 
 #endif

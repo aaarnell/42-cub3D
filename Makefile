@@ -6,7 +6,7 @@
 #    By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/18 19:58:43 by cnorma            #+#    #+#              #
-#    Updated: 2022/04/14 21:24:02 by aarnell          ###   ########.fr        #
+#    Updated: 2022/04/16 18:07:46 by aarnell          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ NAME 		=	cub3D
 SRC_DIR		=	./src/
 
 SRC_FILES	=	main.c			read_file.c		check_file.c	\
-				get_imgclr.c	render_frame.c
+				get_imgclr.c	render_frame.c	map_output.c	\
+				hooks.c			render_frame_utils.c
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 
