@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:28:21 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/16 18:43:14 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/17 22:10:51 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,14 @@ static void	struct_init(t_vars *vars)
 	// vars->anm_itm = NULL;
 	vars->ppx = 0;
 	vars->ppy = 0;
+	vars->ppa = 0;
 	//vars->cn = NULL;
 	// vars->cnt_stp = 0;
 	// vars->sgn_scr = 0;
 	// vars->timer = 0;
 	vars->w_map = 0;
 	vars->h_map = 0;
+	vars->mouse_pos_x = -1;
 	if (alloc_init(vars) == -1)
 	 	close_prog(NULL, ERR_ALLOC);
 }
@@ -115,6 +117,7 @@ int	main(int argc, char **argv)
 	vars.addr = mlx_get_data_addr(vars.img, &vars.bits_per_pixel, &vars.line_length, &vars.endian);
 	mlx_loop_hook(vars.mlx, render_frame, &vars);
 	mlx_hook (vars.win, 2, 0L, key_hook, &vars);
+	mlx_hook (vars.win, 6, 0L, mouse_move, &vars);
 	mlx_hook (vars.win, 17, 0L, cross_exit, &vars);
 	mlx_loop(vars.mlx);
 	return (0);

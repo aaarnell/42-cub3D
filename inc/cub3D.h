@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:22:47 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/16 20:58:38 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/17 22:35:37 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>	//close()
 # include <stdio.h>
 # include <fcntl.h>		//open() и O_XXX-флаги
+# include <math.h>
 
 //# define REVERS_ANIM_SPD 5			//Скорость анимании 1 - самая быстрая
 //# define ITER_IN_SECOND 60			//Число циклов mlx_loop примерно = секунде
@@ -26,27 +27,20 @@
 //# define STR_STEPS "Steps:"			//Обозначение счетчика шагов
 //# define STR_WON "You won!"			//Текст заставки в случае победы
 //# define STR_GAME_OVER "Game over!"	//Текст заставки в случае проигрыша
-# define WIN_WD 1920				//Ширина окна в пикселях
-# define WIN_HG 1080				//Высотка окна в пикселях
-# define MAP_Z 10					//Пикселей на один элемент для миникарты
-# define M_PLR_CLR 0x00CC0000		//Цвет игрока на миникарте
-# define M_WLL_CLR 0x00FFFFFF		//Цвет стен на миникарте
-# define M_EMP_CLR 0x00000000		//Цвет пустот на миникарте
-//# define M_
+# define WIN_WD		1920		//Ширина окна в пикселях
+# define WIN_HG		1080		//Высотка окна в пикселях
+# define MAP_Z		10			//Пикселей на один элемент для миникарты
+# define M_PLR_CLR	0x00CC0000	//Цвет игрока на миникарте
+# define M_WLL_CLR	0x00FFFFFF	//Цвет стен на миникарте
+# define M_EMP_CLR	0x00000000	//Цвет пустот на миникарте
+# define M_RAY_CLR	0x0098FB98	//Цвет луча зоны видимости
+# define ROTTN_ST	15			//Шаг поворота угла обзора в градусах для клавиш
+# define MOUSE_SENS	3			//Шаг поворота угла обзора в градусах для мыши
+# define MOV_ST		0.3			//Шаг игрока в доле от одного элемента карты
+
 
 //Символы карты допустимые
 static char	*g_str_sym = " 01NSEW";
-
-//Картинки для вывода символов карты на экран
-static char	*g_pict_path[] = {
-	"./pict/empty.xpm",
-	"./pict/enemy.xpm",
-	"./pict/exit.xpm",
-	"./pict/item_0.xpm",
-	"./pict/player.xpm",
-	"./pict/wall.xpm",
-	NULL
-};
 
 //ID изображений стен, по которым программа ищет их адреса во вводном файле
 static char	*g_id_img[] = {
@@ -119,12 +113,15 @@ typedef struct s_vars{
 	//void	**anm_itm;
 	float	ppx;
 	float	ppy;
+	float	ppa;
 	// int		*cn;
 	// int		cnt_stp;
 	// int		sgn_scr;
 	//int		timer;
 	int		w_map;
 	int		h_map;
+	int		len_ray;
+	int		mouse_pos_x;
 }	t_vars;
 
 void	read_file(char *file, t_vars *vars);
@@ -137,6 +134,7 @@ void	map_output(t_vars *vars);
 //int		load_imgs(t_vars *vars, void **imgs, char **pth);
 // int		render_next_frame(t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
+int		mouse_move(int x, int y, t_vars *vars);
 int		close_prog(t_vars *vars, enum e_err	ernum);
 
 #endif

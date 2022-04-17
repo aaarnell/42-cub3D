@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 22:10:48 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/16 20:00:19 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/17 22:34:28 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,26 +38,42 @@ static void	check_and_move(t_vars *vars, float tx, float ty)
 
 static void	address_definition(t_vars *vars, int keycode, float *tx, float *ty)
 {
+	float angle;
+
 	if (keycode == 13)
-	{
-		*tx = vars->ppx;
-		*ty = vars->ppy - 0.1;
-	}
+		angle = vars->ppa;
 	if (keycode == 1)
-	{
-		*tx = vars->ppx;
-		*ty = vars->ppy + 0.1;
-	}
+		angle = vars->ppa - M_PI;
 	if (keycode == 0)
-	{
-		*tx = vars->ppx - 0.1;
-		*ty = vars->ppy;
-	}
+		angle = vars->ppa - M_PI_2;
 	if (keycode == 2)
-	{
-		*tx = vars->ppx + 0.1;
-		*ty = vars->ppy;
-	}
+		angle = vars->ppa + M_PI_2;
+	*ty = vars->ppy + MOV_ST * sinf(angle);
+	*tx = vars->ppx + MOV_ST * cosf(angle);
+
+}
+
+static void change_direction(t_vars *vars, int src, int keycode, int mouse)
+{
+	float rad;
+
+	if (!src)
+		rad = M_PI * ((float)ROTTN_ST / 180);
+	else
+		rad = M_PI * ((float)MOUSE_SENS / 180);
+
+	if ((!src && keycode == 123) || (src && mouse < 0))
+		vars->ppa -= rad;
+	else if ((!src && keycode == 124) || (src && mouse > 0))
+		vars->ppa += rad;
+}
+
+static void print_player_pos(t_vars *vars)
+{
+	float angle;
+
+	angle = 180 * (vars->ppa / M_PI);
+	printf("player_pos: x = %f, y = %f, ang = %f\n", vars->ppx, vars->ppy, angle);
 }
 
 int	key_hook(int keycode, t_vars *vars)
@@ -70,8 +86,30 @@ int	key_hook(int keycode, t_vars *vars)
 		address_definition(vars, keycode, &tx, &ty);
 		check_and_move(vars, tx, ty);
 	}
+	if (keycode == 123 || keycode == 124)
+		change_direction(vars, 0, keycode, 0);
 	if (keycode == 53)
 		close_prog(vars, NONE);
-	printf("player_pos: x = %f, y = %f\n", vars->ppx, vars->ppy);
+
+print_player_pos(vars); //для вывода в терминал местоположения пользователя
+
+	return (0);
+}
+
+int mouse_move(int x, int y, t_vars *vars)
+{
+	(void)y;
+	//printf("x = %d, y = %d\n", x, y);
+	if (x >= 0 && x < vars->wd)
+	{
+		if (vars->mouse_pos_x != -1)
+		{
+			if (vars->mouse_pos_x > x)
+				change_direction(vars, 1, -1, -1);
+			else if (vars->mouse_pos_x < x)
+				change_direction(vars, 1, -1, 1);
+		}
+		vars->mouse_pos_x = x;
+	}
 	return (0);
 }
