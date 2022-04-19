@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 22:10:48 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/17 22:34:28 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/19 19:20:38 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ static void change_direction(t_vars *vars, int src, int keycode, int mouse)
 	float rad;
 
 	if (!src)
-		rad = M_PI * ((float)ROTTN_ST / 180);
+		rad = M_PI * ((float)TRN_KEY / 180);
 	else
-		rad = M_PI * ((float)MOUSE_SENS / 180);
+		rad = M_PI * ((float)TRN_MOUSE / 180);
 
 	if ((!src && keycode == 123) || (src && mouse < 0))
 		vars->ppa -= rad;
@@ -68,13 +68,13 @@ static void change_direction(t_vars *vars, int src, int keycode, int mouse)
 		vars->ppa += rad;
 }
 
-static void print_player_pos(t_vars *vars)
-{
-	float angle;
+// static void print_player_pos(t_vars *vars)
+// {
+// 	float angle;
 
-	angle = 180 * (vars->ppa / M_PI);
-	printf("player_pos: x = %f, y = %f, ang = %f\n", vars->ppx, vars->ppy, angle);
-}
+// 	angle = 180 * (vars->ppa / M_PI);
+// 	printf("player_pos: x = %f, y = %f, ang = %f\n", vars->ppx, vars->ppy, angle);
+// }
 
 int	key_hook(int keycode, t_vars *vars)
 {
@@ -91,7 +91,7 @@ int	key_hook(int keycode, t_vars *vars)
 	if (keycode == 53)
 		close_prog(vars, NONE);
 
-print_player_pos(vars); //для вывода в терминал местоположения пользователя
+//print_player_pos(vars); //для вывода в терминал местоположения пользователя
 
 	return (0);
 }
