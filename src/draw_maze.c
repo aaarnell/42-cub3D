@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 21:34:27 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/20 20:16:06 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/20 22:46:33 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,14 @@ void draw_wall(t_vars *vars, float angle, int line_h)
 	float	size_att;
 	int		size_px;
 
-	i = 0.1;
+	i = 0.001;
 	while (i <= vars->len_ray)
 	{
 		y = vars->ppy + i * sinf(angle);
 		x = vars->ppx + i * cosf(angle);
 		if (vars->map_mx[(int)y][(int)x] == '1')
 			break ;
-		i += 0.1;
+		i += 0.001;
 	}
 	//i -= 0.1;
 	size_att = 1.0 / i / vars->hg_dst_att;
