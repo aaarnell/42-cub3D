@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 17:45:24 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/19 22:54:22 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/20 19:48:28 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ void rays_caster(t_vars *vars, char *ray_maze)
 	float	angle;
 	float	st;
 	int		sgn;
+	int		line_h;
 
 	sgn = 0;
+	line_h = 0;
 	if (!ft_strncmp(ray_maze, "rays", 4))
 		sgn = 1;
 	if (!ft_strncmp(ray_maze, "maze", 4))
@@ -32,7 +34,8 @@ void rays_caster(t_vars *vars, char *ray_maze)
 		if (sgn == 1)
 			draw_ray(vars, angle);
 		if (sgn == 2)
-			draw_wall(vars, angle);
+			draw_wall(vars, angle, line_h);
 		angle += st;
+		line_h++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 21:34:27 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/19 23:38:13 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/20 20:16:06 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,28 @@ static void pour_floor_ceiling(t_vars *vars)
 	}
 }
 
-void draw_wall(t_vars *vars, float angle)
+void vert_line_put(t_vars *vars, int line_h, int size_px, float x, float y)
+{
+	int from;
+	int to;
+	int color;
+
+	color = M_WLL_CLR;
+	if (((int)(x - 0.1) < (int)(x + 0.1) ||
+		(int)(x - 0.1) > (int)(x + 0.1)) &&
+		((int)(y - 0.1) < (int)(y + 0.1) ||
+		(int)(y - 0.1) > (int)(y + 0.1)))
+		color = M_EMP_CLR;
+	from = (WIN_HG - size_px) / 2;
+	to = from + size_px;
+	while (from < to)
+	{
+		my_mlx_pixel_put(vars, line_h, from, color);
+		from++;
+	}
+}
+
+void draw_wall(t_vars *vars, float angle, int line_h)
 {
 	float	i;
 	float	y;
@@ -50,10 +71,10 @@ void draw_wall(t_vars *vars, float angle)
 			break ;
 		i += 0.1;
 	}
-	i -= 0.1;
+	//i -= 0.1;
 	size_att = 1.0 / i / vars->hg_dst_att;
 	size_px = WIN_HG * size_att;
-	vert_line_put
+	vert_line_put(vars, line_h, size_px, x, y);
 }
 
 void draw_maze(t_vars *vars)

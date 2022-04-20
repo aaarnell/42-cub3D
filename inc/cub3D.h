@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:22:47 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/19 23:02:32 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/20 20:18:02 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,18 @@
 //# define STR_WON "You won!"			//Текст заставки в случае победы
 //# define STR_GAME_OVER "Game over!"	//Текст заставки в случае проигрыша
 # define M_PLR_CLR	0x00CC0000	//Цвет игрока на миникарте
-# define M_WLL_CLR	0x00FFFFFF	//Цвет стен на миникарте
+# define M_WLL_CLR	0x00FFFFFF	//Цвет стен на миникарте и в лабиринте
 # define M_EMP_CLR	0x00000000	//Цвет пустот на миникарте
 # define M_RAY_CLR	0x0098FB98	//Цвет луча зоны видимости
 # define WIN_WD		1920	//Ширина окна в пикселях
 # define WIN_HG		1080	//Высотка окна в пикселях
 
-# define MAP_Z		30		//Пикселей на один элемент для миникарты
+# define MAP_Z		10		//Пикселей на один элемент для миникарты
 # define ANGLE_VIEW	66		//Угол обзора в градусах
-# define PLR_SIZE	15		//Размер игрока в пикселях на миникарте
+# define PLR_SIZE	5		//Размер игрока в пикселях на миникарте
 
-# define TRN_KEY	15		//Поворот в градусах за одно нажатие <-/->
-# define TRN_MOUSE	4		//Поворот в градусах за 1 ед. сдвига мыши
+# define TRN_KEY	10		//Поворот в градусах за одно нажатие <-/->
+# define TRN_MOUSE	2		//Поворот в градусах за 1 ед. сдвига мыши
 # define MOV_ST		0.2		//Шаг игрока, доля от размера 1 блока карты
 
 //Символы карты допустимые
@@ -138,7 +138,7 @@ void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void	rays_caster(t_vars *vars, char *ray_maze);
 int		render_frame(t_vars *vars);
 void	draw_maze(t_vars *vars);
-void	draw_wall(t_vars *vars, float angle);
+void	draw_wall(t_vars *vars, float angle, int line_h);
 void	draw_ray(t_vars *vars, float angle);
 void	draw_map(t_vars *vars);
 //int		load_imgs(t_vars *vars, void **imgs, char **pth);
