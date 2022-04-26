@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 10:30:41 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/19 21:33:36 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/26 21:12:53 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,19 @@ static void player_output(t_vars *vars)
 	}
 }
 
-void draw_ray(t_vars *vars, float angle)
+// static void put_float(char *str, float i)
+// {
+// 	float f;
+
+// 	f = (i - (int)i) * 1000;
+// 	ft_putstr_fd(str, 1);
+// 	ft_putnbr_fd((int)i, 1);
+// 	write(1, ".", 1);
+// 	ft_putnbr_fd((int)f, 1);
+// 	write(1, "\t", 1);
+// }
+
+void draw_ray(t_vars *vars, t_ray *ray)
 {
 	float	i;
 	float	y;
@@ -63,12 +75,10 @@ void draw_ray(t_vars *vars, float angle)
 
 	st = (float)1 / (float)MAP_Z;
 	i = st;
-	while (i <= (float)vars->len_ray)
+	while (i < ray->dist)
 	{
-		y = vars->ppy + i * sinf(angle);
-		x = vars->ppx + i * cosf(angle);
-		if (vars->map_mx[(int)y][(int)x] == '1')
-			return ;
+		y = vars->ppy + i * sinf(ray->angle);
+		x = vars->ppx + i * cosf(ray->angle);
 		my_mlx_pixel_put(vars, x * MAP_Z, y * MAP_Z, M_RAY_CLR);
 		i += st;
 	}

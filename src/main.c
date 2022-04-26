@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:28:21 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/24 15:45:51 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/26 21:26:41 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ int	main(int argc, char **argv)
 	vars.img = mlx_new_image(vars.mlx, vars.wd, vars.hg);
 	vars.addr = mlx_get_data_addr(vars.img, &vars.bits_per_pixel, &vars.line_length, &vars.endian);
 	mlx_loop_hook(vars.mlx, render_frame, &vars);
+// render_frame(&vars);
 	mlx_hook (vars.win, 2, 0L, key_hook, &vars);
 	mlx_hook (vars.win, 6, 0L, mouse_move, &vars);
 	mlx_hook (vars.win, 17, 0L, cross_exit, &vars);

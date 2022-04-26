@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 22:10:48 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/19 19:20:38 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/26 21:30:47 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int mouse_move(int x, int y, t_vars *vars)
 {
 	(void)y;
 	//printf("x = %d, y = %d\n", x, y);
-	if (x >= 0 && x < vars->wd)
+	if (x >= 0 && x < vars->wd && y >= 0 && y < vars->hg)
 	{
 		if (vars->mouse_pos_x != -1)
 		{
