@@ -6,13 +6,13 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 10:30:41 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/26 21:12:53 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/27 20:05:26 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static void pour_elem_minimap(t_vars *vars, float x, float y, int clr)
+static void pour_elem_minimap(t_vars *vars, double x, double y, int clr)
 {
 	int i;
 	int j;
@@ -54,9 +54,9 @@ static void player_output(t_vars *vars)
 	}
 }
 
-// static void put_float(char *str, float i)
+// static void put_double(char *str, double i)
 // {
-// 	float f;
+// 	double f;
 
 // 	f = (i - (int)i) * 1000;
 // 	ft_putstr_fd(str, 1);
@@ -68,17 +68,17 @@ static void player_output(t_vars *vars)
 
 void draw_ray(t_vars *vars, t_ray *ray)
 {
-	float	i;
-	float	y;
-	float	x;
-	float	st;
+	double	i;
+	double	y;
+	double	x;
+	double	st;
 
-	st = (float)1 / (float)MAP_Z;
+	st = (double)1 / (double)MAP_Z;
 	i = st;
 	while (i < ray->dist)
 	{
-		y = vars->ppy + i * sinf(ray->angle);
-		x = vars->ppx + i * cosf(ray->angle);
+		y = vars->ppy + i * sin(ray->angle);
+		x = vars->ppx + i * cos(ray->angle);
 		my_mlx_pixel_put(vars, x * MAP_Z, y * MAP_Z, M_RAY_CLR);
 		i += st;
 	}

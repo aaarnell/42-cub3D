@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 22:10:59 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/17 20:34:41 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/28 00:10:43 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ static void get_player_pos(t_vars *vars)
 		{
 			if (ft_strchr(g_str_sym + 3, vars->map_mx[i][j]))
 			{
-				vars->ppx = (float)j + 0.5;
-				vars->ppy = (float)i + 0.5;
+				vars->ppx = (double)j + 0.5;
+				vars->ppy = (double)i + 0.5;
 				if (vars->map_mx[i][j]  == 'N')
 					vars->ppa = M_PI + M_PI_2;
 				if (vars->map_mx[i][j]  == 'W')

@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 21:34:27 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/26 22:33:57 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/28 00:31:47 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ static void pour_floor_ceiling(t_vars *vars)
 
 static int defin_color(t_ray *ray)
 {
-	float	xps;
-	float	xms;
-	float	yps;
-	float	yms;
+	double	xps;
+	double	xms;
+	double	yps;
+	double	yms;
 
 	xps = ray->end_x + 0.000001;
 	xms = ray->end_x - 0.000001;
@@ -48,13 +48,13 @@ static int defin_color(t_ray *ray)
 	// 	return (M_EMP_CLR);
 	if ((int)xms != (int)xps && (int)yms == (int)yps)
 	{
-		if (cosf(ray->angle) < 0)
+		if (cos(ray->angle) < 0)
 			return (M_EWLL_CLR);
 		return (M_WWLL_CLR);
 	}
 	else
 	{
-		if (sinf(ray->angle) < 0)
+		if (sin(ray->angle) < 0)
 			return (M_NWLL_CLR);
 		return (M_SWLL_CLR);
 	}
@@ -83,11 +83,18 @@ void vert_line_put(t_vars *vars, int size_px, t_ray *ray)
 		my_mlx_pixel_put(vars, ray->num_line, from, color);
 		from++;
 	}
+
+// if (ray->num_line > 95 && ray->num_line < 105)
+// {
+// 	printf("num_line = %d, color = %d, size_px = %d\t", ray->num_line, color, size_px);
+// 	printf("angle = %f, dist = %f, x = %f, y = %f\n", ray->angle, ray->dist, ray->end_x, ray->end_y);
+// }
+
 }
 
 void draw_wall(t_vars *vars, t_ray *ray)
 {
-	float	size_att;
+	double	size_att;
 	int		size_px;
 
 	size_att = 1.0 / ray->dist / vars->hg_dst_att;

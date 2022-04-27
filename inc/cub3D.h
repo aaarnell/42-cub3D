@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:22:47 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/26 22:38:41 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/28 00:36:41 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define WIN_HG		720	//Высотка окна в пикселях
 
 # define MAP_Z		10		//Пикселей на один элемент для миникарты
-# define ANGLE_VIEW	80		//Угол обзора в градусах
+# define ANGLE_VIEW	60		//Угол обзора в градусах
 # define PLR_SIZE	5		//Размер игрока в пикселях на миникарте
 
 # define TRN_KEY	10		//Поворот в градусах за одно нажатие <-/->
@@ -118,12 +118,12 @@ typedef struct s_vars{
 	int		endian;
 	void	**imgs;
 	//void	**anm_itm;
-	float	ppx;
-	float	ppy;
-	float	ppa;
-	float	hlf_vw_angle;
-	float	win_dist;
-	float	hg_dst_att;
+	double	ppx;
+	double	ppy;
+	double	ppa;
+	double	hlf_vw_angle;
+	double	win_dist;
+	double	hg_dst_att;
 	// int		*cn;
 	// int		cnt_stp;
 	// int		sgn_scr;
@@ -135,10 +135,10 @@ typedef struct s_vars{
 }	t_vars;
 
 typedef struct s_ray{
-	float	angle;
-	float	dist;
-	float	end_x;
-	float	end_y;
+	double	angle;
+	double	dist;
+	double	end_x;
+	double	end_y;
 	int		num_line;
 }	t_ray;
 

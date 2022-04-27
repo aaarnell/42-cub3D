@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:28:21 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/26 21:26:41 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/28 00:34:28 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ static void	struct_init(t_vars *vars)
 	vars->ppx = 0;
 	vars->ppy = 0;
 	vars->ppa = 0;
-	vars->hlf_vw_angle = M_PI / ((float)180 / ((float)ANGLE_VIEW / 2));
-	vars->win_dist = (float)WIN_WD / (float)WIN_HG / 2 / tanf(vars->hlf_vw_angle);
+	vars->hlf_vw_angle = M_PI / ((double)180 / ((double)ANGLE_VIEW / 2));
+	vars->win_dist = (double)WIN_WD / (double)WIN_HG / 2 / tan(vars->hlf_vw_angle);
 	vars->hg_dst_att = 1.0 / vars->win_dist;
 	//vars->cn = NULL;
 	// vars->cnt_stp = 0;

@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 21:17:22 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/26 21:20:30 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/27 20:38:31 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	render_frame(t_vars *vars)
 	// vars->img = mlx_new_image(vars->mlx, vars->wd, vars->hg);
 	// vars->addr = mlx_get_data_addr(vars->img, &vars->bits_per_pixel, &vars->line_length, &vars->endian);
 	draw_maze(vars);
-	draw_map(vars);
+	//draw_map(vars);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, 0, 0);
 	// mlx_destroy_image(vars->mlx, vars->img);
 	return (0);

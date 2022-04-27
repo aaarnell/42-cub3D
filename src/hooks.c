@@ -6,13 +6,13 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 22:10:48 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/26 21:30:47 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/27 20:26:30 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static void	check_and_move(t_vars *vars, float tx, float ty)
+static void	check_and_move(t_vars *vars, double tx, double ty)
 {
 	char	*trg;
 	char	*plr;
@@ -36,9 +36,9 @@ static void	check_and_move(t_vars *vars, float tx, float ty)
 	}
 }
 
-static void	address_definition(t_vars *vars, int keycode, float *tx, float *ty)
+static void	address_definition(t_vars *vars, int keycode, double *tx, double *ty)
 {
-	float angle;
+	double angle;
 
 	if (keycode == 13)
 		angle = vars->ppa;
@@ -48,19 +48,19 @@ static void	address_definition(t_vars *vars, int keycode, float *tx, float *ty)
 		angle = vars->ppa - M_PI_2;
 	if (keycode == 2)
 		angle = vars->ppa + M_PI_2;
-	*ty = vars->ppy + MOV_ST * sinf(angle);
-	*tx = vars->ppx + MOV_ST * cosf(angle);
+	*ty = vars->ppy + MOV_ST * sin(angle);
+	*tx = vars->ppx + MOV_ST * cos(angle);
 
 }
 
 static void change_direction(t_vars *vars, int src, int keycode, int mouse)
 {
-	float rad;
+	double rad;
 
 	if (!src)
-		rad = M_PI * ((float)TRN_KEY / 180);
+		rad = M_PI * ((double)TRN_KEY / 180);
 	else
-		rad = M_PI * ((float)TRN_MOUSE / 180);
+		rad = M_PI * ((double)TRN_MOUSE / 180);
 
 	if ((!src && keycode == 123) || (src && mouse < 0))
 		vars->ppa -= rad;
@@ -70,7 +70,7 @@ static void change_direction(t_vars *vars, int src, int keycode, int mouse)
 
 // static void print_player_pos(t_vars *vars)
 // {
-// 	float angle;
+// 	double angle;
 
 // 	angle = 180 * (vars->ppa / M_PI);
 // 	printf("player_pos: x = %f, y = %f, ang = %f\n", vars->ppx, vars->ppy, angle);
@@ -78,8 +78,8 @@ static void change_direction(t_vars *vars, int src, int keycode, int mouse)
 
 int	key_hook(int keycode, t_vars *vars)
 {
-	float	tx;
-	float	ty;
+	double	tx;
+	double	ty;
 
 	if (keycode < 3 || keycode == 13)
 	{
@@ -98,7 +98,6 @@ int	key_hook(int keycode, t_vars *vars)
 
 int mouse_move(int x, int y, t_vars *vars)
 {
-	(void)y;
 	//printf("x = %d, y = %d\n", x, y);
 	if (x >= 0 && x < vars->wd && y >= 0 && y < vars->hg)
 	{
