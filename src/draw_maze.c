@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 21:34:27 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/28 00:31:47 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/28 19:16:27 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ static int defin_color(t_ray *ray)
 	xms = ray->end_x - 0.000001;
 	yps = ray->end_y + 0.000001;
 	yms = ray->end_y - 0.000001;
-	// if ((int)xms != (int)xps && (int)yms != (int)yps)
-	// 	return (M_EMP_CLR);
 	if ((int)xms != (int)xps && (int)yms == (int)yps)
 	{
 		if (cos(ray->angle) < 0)
@@ -96,7 +94,14 @@ void draw_wall(t_vars *vars, t_ray *ray)
 {
 	double	size_att;
 	int		size_px;
+	double	fish_cor_ang;
 
+	fish_cor_ang = vars->ppa - ray->angle;
+	if (fish_cor_ang < 0)
+		fish_cor_ang += 2 * M_PI;
+	if (fish_cor_ang > 2 * M_PI)
+		fish_cor_ang -= 2 * M_PI;
+	ray->dist *= cos(fish_cor_ang);
 	size_att = 1.0 / ray->dist / vars->hg_dst_att;
 	size_px = WIN_HG * size_att;
 	vert_line_put(vars, size_px, ray);
