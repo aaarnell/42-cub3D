@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 20:19:37 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/14 21:44:59 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/28 22:45:52 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 static int check_import_image(t_vars *vars, char *line)
 {
-	int	i;
-	char *pth;
+	int		i;
+	char	*pth;
+	int		end;
 
 	i = 0;
 	while (g_id_img[i])
@@ -24,6 +25,7 @@ static int check_import_image(t_vars *vars, char *line)
 		{
 			pth = ft_strrchr(line, ' ');
 			vars->imgs[i] = mlx_xpm_file_to_image(vars->mlx, ++pth, &vars->wdi, &vars->hgi);
+			vars->addrs[i] = mlx_get_data_addr(vars->imgs[i], &vars->bpp, &vars->ll, &end);
 			//возможно стоит чекать размеры изображений, чтобы были одинаковыми или это некритично?
 			if (!vars->imgs[i])
 			{

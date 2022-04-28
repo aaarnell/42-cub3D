@@ -1,7 +1,7 @@
-NO ./img/item_0.xpm
-SO ./img/item_1.xpm
-WE ./img/item_2.xpm
-EA ./img/item_3.xpm
+NO ./img/no_white.xpm
+WE ./img/we_stone.xpm
+SO ./img/so_wave.xpm
+EA ./img/ea_squares.xpm
 
 F 255,255,0
 C 0,190,255

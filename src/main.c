@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:28:21 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/28 00:34:28 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/28 22:13:51 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ static int	alloc_init(t_vars *vars)
 	//vars->imgs = (void **)malloc(sizeof(void *) * (sizeof(enum e_pict) + 1));
 	vars->imgs = (void **)ft_calloc(sizeof(void *), (sizeof(enum e_pict) + 1));
 	if (!vars->imgs)
+		return (-1);
+	vars->addrs = (char **)ft_calloc(sizeof(char *), (sizeof(enum e_pict) + 1));
+	if (!vars->addrs)
 		return (-1);
 	//vars->imgs[sizeof(enum	e_pict)] = NULL;
 
@@ -118,6 +121,7 @@ int	main(int argc, char **argv)
 	vars.win = mlx_new_window(vars.mlx, vars.wd, vars.hg, "cub3D!");
 	vars.img = mlx_new_image(vars.mlx, vars.wd, vars.hg);
 	vars.addr = mlx_get_data_addr(vars.img, &vars.bits_per_pixel, &vars.line_length, &vars.endian);
+printf("ll = %d, bpp = %d, endian = %d\n", vars.line_length, vars.bits_per_pixel, vars.endian);
 	mlx_loop_hook(vars.mlx, render_frame, &vars);
 // render_frame(&vars);
 	mlx_hook (vars.win, 2, 0L, key_hook, &vars);

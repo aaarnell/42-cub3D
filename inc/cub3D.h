@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:22:47 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/28 00:36:41 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/28 22:51:40 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,17 +117,15 @@ typedef struct s_vars{
 	int		line_length;
 	int		endian;
 	void	**imgs;
-	//void	**anm_itm;
+	char	**addrs;
+	int		bpp;
+	int		ll;
 	double	ppx;
 	double	ppy;
 	double	ppa;
 	double	hlf_vw_angle;
 	double	win_dist;
 	double	hg_dst_att;
-	// int		*cn;
-	// int		cnt_stp;
-	// int		sgn_scr;
-	//int		timer;
 	int		w_map;
 	int		h_map;
 	int		len_ray;
@@ -135,11 +133,15 @@ typedef struct s_vars{
 }	t_vars;
 
 typedef struct s_ray{
-	double	angle;
-	double	dist;
-	double	end_x;
-	double	end_y;
-	int		num_line;
+	double		angle;
+	double		dist;
+	double		end_x;
+	double		end_y;
+	int			num_line;
+	enum e_pict	side;
+	double		prop_h;
+	double		prop_v;
+	//int			px_clr;
 }	t_ray;
 
 void	read_file(char *file, t_vars *vars);
@@ -147,6 +149,7 @@ void	chk_sym(char *line, t_vars *vars, int *player);
 int		get_imgcolor(int fd, t_vars *vars, char **line);
 void	final_check_map(t_vars *vars);
 void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
+void	put_texture(t_vars *vars, int size_px, t_ray *ray);
 void	rays_caster(t_vars *vars, char *ray_maze);
 int		render_frame(t_vars *vars);
 void	draw_maze(t_vars *vars);

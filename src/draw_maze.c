@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 21:34:27 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/28 19:16:27 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/28 22:52:28 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ void draw_wall(t_vars *vars, t_ray *ray)
 	ray->dist *= cos(fish_cor_ang);
 	size_att = 1.0 / ray->dist / vars->hg_dst_att;
 	size_px = WIN_HG * size_att;
-	vert_line_put(vars, size_px, ray);
+	//vert_line_put(vars, size_px, ray);
+	put_texture(vars, size_px, ray);
 }
 
 void draw_maze(t_vars *vars)
