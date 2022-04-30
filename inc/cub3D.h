@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:22:47 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/28 22:51:40 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/30 18:50:15 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,7 @@
 # include <fcntl.h>		//open() и O_XXX-флаги
 # include <math.h>
 
-//# define REVERS_ANIM_SPD 5			//Скорость анимании 1 - самая быстрая
-//# define ITER_IN_SECOND 60			//Число циклов mlx_loop примерно = секунде
-//# define SEC_SHOW_SCREEN 5			//Секунд показывать финальную заставку
-//# define STR_STEPS "Steps:"			//Обозначение счетчика шагов
-//# define STR_WON "You won!"			//Текст заставки в случае победы
-//# define STR_GAME_OVER "Game over!"	//Текст заставки в случае проигрыша
+# define US_TEXTURE	1			//Исп. текстуры для стен. 1 = true
 # define M_PLR_CLR	0x00CC0000	//Цвет игрока на миникарте
 # define M_RAY_CLR	0x0098FB98	//Цвет области видимости на карте
 # define M_EMP_CLR	0x00000000	//Цвет пустот на миникарте
@@ -35,8 +30,8 @@
 # define M_SWLL_CLR	0x009999FF	//Цвет ЮГ-стен в лабиринте (фиол)
 # define M_WWLL_CLR	0x00FFCCFF	//Цвет ЗАПАД-стен в лабиринте (роз)
 # define M_EWLL_CLR	0x00FF9999	//Цвет ВОСТОК-стен в лабиринте (корал)
-# define WIN_WD		1280	//Ширина окна в пикселях
-# define WIN_HG		720	//Высотка окна в пикселях
+# define WIN_WD		1280		//Ширина окна в пикселях
+# define WIN_HG		720			//Высотка окна в пикселях
 
 # define MAP_Z		10		//Пикселей на один элемент для миникарты
 # define ANGLE_VIEW	60		//Угол обзора в градусах
@@ -107,8 +102,6 @@ typedef struct s_vars{
 	void	*img;
 	char	*addr;
 	char	**map_mx;
-	int		wd;
-	int		hg;
 	int		floor_color;
 	int		ceiling_color;
 	int		wdi;
@@ -141,12 +134,11 @@ typedef struct s_ray{
 	enum e_pict	side;
 	double		prop_h;
 	double		prop_v;
-	//int			px_clr;
 }	t_ray;
 
 void	read_file(char *file, t_vars *vars);
 void	chk_sym(char *line, t_vars *vars, int *player);
-int		get_imgcolor(int fd, t_vars *vars, char **line);
+void	get_imgcolor(int fd, t_vars *vars, char **line);
 void	final_check_map(t_vars *vars);
 void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void	put_texture(t_vars *vars, int size_px, t_ray *ray);

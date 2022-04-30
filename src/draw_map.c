@@ -6,16 +6,16 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 10:30:41 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/27 20:05:26 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/30 17:08:29 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static void pour_elem_minimap(t_vars *vars, double x, double y, int clr)
+static void	pour_elem_minimap(t_vars *vars, double x, double y, int clr)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	x *= MAP_Z;
 	y *= MAP_Z;
@@ -25,19 +25,19 @@ static void pour_elem_minimap(t_vars *vars, double x, double y, int clr)
 		j = 0;
 		while (j < MAP_Z)
 		{
-			my_mlx_pixel_put(vars, x+j, y+i, clr);
+			my_mlx_pixel_put(vars, x + j, y + i, clr);
 			j++;
 		}
 		i++;
 	}
 }
 
-static void player_output(t_vars *vars)
+static void	player_output(t_vars *vars)
 {
-	int i;
-	int j;
-	int x;
-	int y;
+	int	i;
+	int	j;
+	int	x;
+	int	y;
 
 	x = MAP_Z * vars->ppx;
 	y = MAP_Z * vars->ppy;
@@ -54,19 +54,7 @@ static void player_output(t_vars *vars)
 	}
 }
 
-// static void put_double(char *str, double i)
-// {
-// 	double f;
-
-// 	f = (i - (int)i) * 1000;
-// 	ft_putstr_fd(str, 1);
-// 	ft_putnbr_fd((int)i, 1);
-// 	write(1, ".", 1);
-// 	ft_putnbr_fd((int)f, 1);
-// 	write(1, "\t", 1);
-// }
-
-void draw_ray(t_vars *vars, t_ray *ray)
+void	draw_ray(t_vars *vars, t_ray *ray)
 {
 	double	i;
 	double	y;
@@ -84,12 +72,12 @@ void draw_ray(t_vars *vars, t_ray *ray)
 	}
 }
 
-void draw_map(t_vars *vars)
+void	draw_map(t_vars *vars)
 {
 	int	x;
-	int y;
-	int color;
-	int len;
+	int	y;
+	int	color;
+	int	len;
 
 	y = 0;
 	while (vars->map_mx[y])

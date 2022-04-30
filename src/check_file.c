@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 22:06:26 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/16 16:47:12 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/30 17:06:03 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	chk_sym(char *line, t_vars *vars, int *player)
 	}
 }
 
-static void chk_chr_arnd(char **map, int v, int h)
+static void	chk_chr_arnd(char **map, int v, int h)
 {
 	int	s;
 	int	c;
@@ -48,7 +48,7 @@ static void chk_chr_arnd(char **map, int v, int h)
 		c = h - 1;
 		while (c <= (h + 1))
 		{
-			if(!ft_strchr((g_str_sym + 1), map[s][c]) || map[s][c] == '\0')
+			if (!ft_strchr((g_str_sym + 1), map[s][c]) || map[s][c] == '\0')
 				close_prog(NULL, ERR_SUROBS);
 			c++;
 		}
@@ -56,11 +56,11 @@ static void chk_chr_arnd(char **map, int v, int h)
 	}
 }
 
-void final_check_map(t_vars *vars)
+void	final_check_map(t_vars *vars)
 {
-	int	v;
-	int	h;
-	char **map;
+	int		v;
+	int		h;
+	char	**map;
 
 	map = vars->map_mx;
 	v = 0;

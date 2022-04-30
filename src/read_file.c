@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 22:10:59 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/28 00:10:43 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/30 18:24:03 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,4 @@ void	read_file(char *file, t_vars *vars)
 	get_imgcolor(fd, vars, &line);
 	get_map(fd, vars, line);
 	get_player_pos(vars);
-	printf("ppx = %f, ppy = %f\n", vars->ppx, vars->ppy);
-	printf("w = %d, h = %d\n", vars->w_map, vars->h_map);
 }

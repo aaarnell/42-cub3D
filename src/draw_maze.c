@@ -6,24 +6,24 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 21:34:27 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/28 22:52:28 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/30 18:47:58 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static void pour_floor_ceiling(t_vars *vars)
+static void	pour_floor_ceiling(t_vars *vars)
 {
 	int	x;
-	int y;
+	int	y;
 
 	y = 0;
-	while (y < vars->hg)
+	while (y < WIN_HG)
 	{
 		x = 0;
-		while (x < vars->wd)
+		while (x < WIN_WD)
 		{
-			if (y < vars->hg / 2)
+			if (y < WIN_HG / 2)
 				my_mlx_pixel_put(vars, x, y, vars->ceiling_color);
 			else
 				my_mlx_pixel_put(vars, x, y, vars->floor_color);
@@ -33,7 +33,7 @@ static void pour_floor_ceiling(t_vars *vars)
 	}
 }
 
-static int defin_color(t_ray *ray)
+static int	defin_color(t_ray *ray)
 {
 	double	xps;
 	double	xms;
@@ -59,38 +59,26 @@ static int defin_color(t_ray *ray)
 	return (M_WLL_CLR);
 }
 
-
-void vert_line_put(t_vars *vars, int size_px, t_ray *ray)
+static void	vert_line_put(t_vars *vars, int size_px, t_ray *ray)
 {
 	int		from;
 	int		to;
 	int		color;
 
 	color = defin_color(ray);
-	from = 0;
+	from = (WIN_HG - size_px) / 2;
 	to = WIN_HG;
 	if (size_px < WIN_HG)
-	{
-		from = (WIN_HG - size_px) / 2;
 		to = from + size_px;
-	}
-	else
-		size_px = WIN_HG;
 	while (from < to)
 	{
-		my_mlx_pixel_put(vars, ray->num_line, from, color);
+		if (from >= 0)
+			my_mlx_pixel_put(vars, ray->num_line, from, color);
 		from++;
 	}
-
-// if (ray->num_line > 95 && ray->num_line < 105)
-// {
-// 	printf("num_line = %d, color = %d, size_px = %d\t", ray->num_line, color, size_px);
-// 	printf("angle = %f, dist = %f, x = %f, y = %f\n", ray->angle, ray->dist, ray->end_x, ray->end_y);
-// }
-
 }
 
-void draw_wall(t_vars *vars, t_ray *ray)
+void	draw_wall(t_vars *vars, t_ray *ray)
 {
 	double	size_att;
 	int		size_px;
@@ -104,11 +92,13 @@ void draw_wall(t_vars *vars, t_ray *ray)
 	ray->dist *= cos(fish_cor_ang);
 	size_att = 1.0 / ray->dist / vars->hg_dst_att;
 	size_px = WIN_HG * size_att;
-	//vert_line_put(vars, size_px, ray);
-	put_texture(vars, size_px, ray);
+	if (US_TEXTURE)
+		put_texture(vars, size_px, ray);
+	else
+		vert_line_put(vars, size_px, ray);
 }
 
-void draw_maze(t_vars *vars)
+void	draw_maze(t_vars *vars)
 {
 	pour_floor_ceiling(vars);
 	rays_caster(vars, "maze");
