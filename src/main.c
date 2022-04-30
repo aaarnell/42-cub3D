@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:28:21 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/30 18:51:00 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/30 19:56:13 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,19 @@ static void	struct_init(t_vars *vars)
 	vars->hgi = 0;
 	vars->bits_per_pixel = 0;
 	vars->line_length = 0;
-	vars->endian = 0;
 	vars->imgs = NULL;
 	vars->ppx = 0;
 	vars->ppy = 0;
 	vars->ppa = 0;
 	vars->hlf_vw_angle = M_PI / ((double)180 / ((double)ANGLE_VIEW / 2));
-	vars->win_dist = (double)WIN_WD / (double)WIN_HG / 2 / tan(vars->hlf_vw_angle);
+	vars->win_dist = (double)WIN_WD / (double)WIN_HG \
+		/ 2 / tan(vars->hlf_vw_angle);
 	vars->hg_dst_att = 1.0 / vars->win_dist;
 	vars->w_map = 0;
 	vars->h_map = 0;
 	vars->mouse_pos_x = -1;
 	if (alloc_init(vars) == -1)
-	 	close_prog(NULL, ERR_ALLOC);
+		close_prog(NULL, ERR_ALLOC);
 }
 
 int	main(int argc, char **argv)
@@ -79,7 +79,8 @@ int	main(int argc, char **argv)
 	read_file(argv[1], &vars);
 	vars.win = mlx_new_window(vars.mlx, WIN_WD, WIN_HG, "cub3D!");
 	vars.img = mlx_new_image(vars.mlx, WIN_WD, WIN_HG);
-	vars.addr = mlx_get_data_addr(vars.img, &vars.bits_per_pixel, &vars.line_length, &vars.endian);
+	vars.addr = mlx_get_data_addr(vars.img, \
+		&vars.bits_per_pixel, &vars.line_length, &vars.endian);
 	mlx_loop_hook(vars.mlx, render_frame, &vars);
 	mlx_hook (vars.win, 2, 0L, key_hook, &vars);
 	mlx_hook (vars.win, 6, 0L, mouse_move, &vars);

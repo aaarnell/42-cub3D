@@ -6,13 +6,13 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 22:10:59 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/30 18:24:03 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/30 20:02:56 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static void add_str_to_map(t_vars *vars, char *line)
+static void	add_str_to_map(t_vars *vars, char *line)
 {
 	char	**tmp;
 
@@ -27,9 +27,9 @@ static void add_str_to_map(t_vars *vars, char *line)
 	vars->map_mx = tmp;
 }
 
-static void get_size_map(t_vars *vars)
+static void	get_size_map(t_vars *vars)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (vars->map_mx[i])
@@ -39,13 +39,14 @@ static void get_size_map(t_vars *vars)
 		i++;
 	}
 	vars->h_map = i;
-	vars->len_ray = (int)sqrtf((powf(vars->h_map, 2) + powf(vars->w_map, 2))) + 1;
+	vars->len_ray = (int)sqrtf((powf(vars->h_map, 2) \
+		+ powf(vars->w_map, 2))) + 1;
 }
 
-static void get_map(int fd, t_vars *vars, char *line)
+static void	get_map(int fd, t_vars *vars, char *line)
 {
-	int		res;
-	int		player;
+	int	res;
+	int	player;
 
 	res = 1;
 	player = 0;
@@ -61,10 +62,10 @@ static void get_map(int fd, t_vars *vars, char *line)
 	get_size_map(vars);
 }
 
-static void get_player_pos(t_vars *vars)
+static void	get_player_pos(t_vars *vars)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (vars->map_mx[i])
@@ -76,16 +77,14 @@ static void get_player_pos(t_vars *vars)
 			{
 				vars->ppx = (double)j + 0.5;
 				vars->ppy = (double)i + 0.5;
-				if (vars->map_mx[i][j]  == 'N')
+				if (vars->map_mx[i][j] == 'N')
 					vars->ppa = M_PI + M_PI_2;
-				if (vars->map_mx[i][j]  == 'W')
+				if (vars->map_mx[i][j] == 'W')
 					vars->ppa = M_PI;
-				if (vars->map_mx[i][j]  == 'S')
+				if (vars->map_mx[i][j++] == 'S')
 					vars->ppa = M_PI_2;
-				printf("ppa = %f\n", vars->ppa);
 				return ;
 			}
-			j++;
 		}
 		i++;
 	}

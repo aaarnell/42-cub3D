@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:22:47 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/30 18:50:15 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/30 20:05:18 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ typedef struct s_ray{
 
 void	read_file(char *file, t_vars *vars);
 void	chk_sym(char *line, t_vars *vars, int *player);
+int		import_colors(t_vars *vars, char *line);
 void	get_imgcolor(int fd, t_vars *vars, char **line);
 void	final_check_map(t_vars *vars);
 void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
@@ -148,10 +149,8 @@ void	draw_maze(t_vars *vars);
 void	draw_wall(t_vars *vars, t_ray *ray);
 void	draw_ray(t_vars *vars, t_ray *ray);
 void	draw_map(t_vars *vars);
-//int		load_imgs(t_vars *vars, void **imgs, char **pth);
-// int		render_next_frame(t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
 int		mouse_move(int x, int y, t_vars *vars);
-int		close_prog(t_vars *vars, enum e_err	ernum);
+int		close_prog(t_vars *vars, enum e_err ernum);
 
 #endif
