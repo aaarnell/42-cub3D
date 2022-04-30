@@ -6,23 +6,11 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:28:21 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/30 19:56:13 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/30 21:21:18 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
-
-int	close_prog(t_vars *vars, enum e_err ernum)
-{
-	if (vars && vars->win)
-		mlx_destroy_window(vars->mlx, vars->win);
-	if (ernum)
-		printf("Error: %s\n", g_err_str[ernum]);
-	else if (errno && errno != 60)
-		printf("Error: %s\n", strerror(errno));
-	exit(1);
-	return (0);
-}
 
 static int	cross_exit(t_vars *vars)
 {
@@ -55,6 +43,7 @@ static void	struct_init(t_vars *vars)
 	vars->bits_per_pixel = 0;
 	vars->line_length = 0;
 	vars->imgs = NULL;
+	vars->addrs = NULL;
 	vars->ppx = 0;
 	vars->ppy = 0;
 	vars->ppa = 0;
@@ -66,7 +55,7 @@ static void	struct_init(t_vars *vars)
 	vars->h_map = 0;
 	vars->mouse_pos_x = -1;
 	if (alloc_init(vars) == -1)
-		close_prog(NULL, ERR_ALLOC);
+		close_prog(vars, ERR_ALLOC);
 }
 
 int	main(int argc, char **argv)

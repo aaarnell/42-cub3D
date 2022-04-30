@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:22:47 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/30 20:05:18 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/30 21:32:53 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static char	*g_err_str[] = {
 	"Memory allocation error.",
 	"Failed to load required images of walls.",
 	"Failed to load required colors floor or ceilling.",
-	"There are not enough arguments in the file.",
+	"There are not enough or redundant arguments in the file.",
 	"The file is missing a map.",
 	"The size of the pictures is different.",
 	"Invalid characters on the map layout or \
@@ -104,13 +104,13 @@ typedef struct s_vars{
 	char	**map_mx;
 	int		floor_color;
 	int		ceiling_color;
-	int		wdi;
-	int		hgi;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
 	void	**imgs;
 	char	**addrs;
+	int		wdi;
+	int		hgi;
 	int		bpp;
 	int		ll;
 	double	ppx;
@@ -151,6 +151,6 @@ void	draw_ray(t_vars *vars, t_ray *ray);
 void	draw_map(t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
 int		mouse_move(int x, int y, t_vars *vars);
-int		close_prog(t_vars *vars, enum e_err ernum);
+void	close_prog(t_vars *vars, enum e_err ernum);
 
 #endif

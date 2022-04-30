@@ -6,7 +6,7 @@
 #    By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/18 19:58:43 by cnorma            #+#    #+#              #
-#    Updated: 2022/04/30 19:42:46 by aarnell          ###   ########.fr        #
+#    Updated: 2022/04/30 21:07:26 by aarnell          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC_DIR		=	./src/
 SRC_FILES	=	main.c			read_file.c		check_file.c	\
 				get_imgclr.c	get_imgclr2.c	render_frame.c	draw_map.c	\
 				draw_maze.c		hooks.c			rays_caster.c	\
-				put_texture.c
+				put_texture.c	clean.c
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 

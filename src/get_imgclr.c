@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 20:19:37 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/30 19:52:31 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/30 21:30:34 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ static int	get_image_data(t_vars *vars, char *pth, int i)
 
 	vars->imgs[i] = mlx_xpm_file_to_image(vars->mlx, \
 		pth, &wd, &hg);
+	if (!vars->imgs[i])
+		return (0);
 	vars->addrs[i] = mlx_get_data_addr(vars->imgs[i], \
 		&vars->bpp, &vars->ll, &vars->endian);
-	if (!vars->imgs[i] || !vars->addrs[i])
+	if (!vars->addrs[i])
 		return (0);
 	if (vars->wdi && vars->wdi != wd)
 		return (0);
@@ -46,7 +48,7 @@ static int	import_images(t_vars *vars, char *line)
 			if (!get_image_data(vars, ++pth, i))
 			{
 				free(line);
-				close_prog(NULL, ERR_LOADIMG);
+				close_prog(vars, ERR_LOADIMG);
 			}
 			return (1);
 		}
@@ -82,12 +84,12 @@ void	get_imgcolor(int fd, t_vars *vars, char **line)
 		if (check_fill_img_clr(vars))
 		{
 			free(ln);
-			close_prog(NULL, ERR_ARGNMFL);
+			close_prog(vars, ERR_ARGNMFL);
 		}
 		*line = ln;
 		return ;
 	}
 	free(ln);
-	close_prog(NULL, ERR_MISMPFL);
+	close_prog(vars, ERR_MISMPFL);
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 22:10:59 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/30 20:02:56 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/04/30 21:23:30 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	add_str_to_map(t_vars *vars, char *line)
 	if (!tmp)
 	{
 		free(line);
-		close_prog(NULL, NONE);
+		close_prog(vars, NONE);
 	}
 	if (vars->map_mx)
 		ft_frmtrx(vars->map_mx);
@@ -81,10 +81,11 @@ static void	get_player_pos(t_vars *vars)
 					vars->ppa = M_PI + M_PI_2;
 				if (vars->map_mx[i][j] == 'W')
 					vars->ppa = M_PI;
-				if (vars->map_mx[i][j++] == 'S')
+				if (vars->map_mx[i][j] == 'S')
 					vars->ppa = M_PI_2;
 				return ;
 			}
+			j++;
 		}
 		i++;
 	}
@@ -97,7 +98,7 @@ void	read_file(char *file, t_vars *vars)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		close_prog(NULL, NONE);
+		close_prog(vars, NONE);
 	get_imgcolor(fd, vars, &line);
 	get_map(fd, vars, line);
 	get_player_pos(vars);
