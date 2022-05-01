@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:06:45 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/30 21:26:17 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/05/01 13:24:56 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	clean_map(t_vars *vars)
 	int	i;
 
 	i = 0;
-	if (vars->map_mx)
+	if (vars && vars->map_mx)
 	{
 		while (vars->map_mx[i])
 			free(vars->map_mx[i++]);

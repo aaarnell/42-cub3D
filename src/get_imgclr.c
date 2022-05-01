@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 20:19:37 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/30 21:30:34 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/05/01 13:38:07 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	import_images(t_vars *vars, char *line)
 		if (!ft_strncmp(line, g_id_img[i], ft_strlen(g_id_img[i])))
 		{
 			pth = ft_strrchr(line, ' ');
-			if (!get_image_data(vars, ++pth, i))
+			if (vars->imgs[i] || !get_image_data(vars, ++pth, i))
 			{
 				free(line);
 				close_prog(vars, ERR_LOADIMG);
