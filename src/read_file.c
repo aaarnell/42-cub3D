@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 22:10:59 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/30 21:23:30 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/05/04 19:22:56 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,12 @@ static void	get_player_pos(t_vars *vars)
 void	read_file(char *file, t_vars *vars)
 {
 	int		fd;
+	int		len;
 	char	*line;
 
+	len = ft_strlen(file);
+	if (!file || len < 5 || ft_memcmp((file + (len - 3)), "cub", 3))
+		close_prog(vars, ERR_FILE);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		close_prog(vars, NONE);

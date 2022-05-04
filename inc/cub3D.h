@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:22:47 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/30 21:32:53 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/05/04 19:23:55 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ static char	*g_err_str[] = {
 	"No errors.",
 	"Error in the number of program arguments.",
 	"Memory allocation error.",
+	"Incorrect extension of file or failure to open file.",
 	"Failed to load required images of walls.",
 	"Failed to load required colors floor or ceilling.",
 	"There are not enough or redundant arguments in the file.",
@@ -86,6 +87,7 @@ enum	e_err {
 	NONE,
 	ERR_ARGNUM,
 	ERR_ALLOC,
+	ERR_FILE,
 	ERR_LOADIMG,
 	ERR_LOADCLR,
 	ERR_ARGNMFL,
