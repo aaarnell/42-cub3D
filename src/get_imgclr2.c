@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 19:32:14 by aarnell           #+#    #+#             */
-/*   Updated: 2022/04/30 21:22:05 by aarnell          ###   ########.fr       */
+/*   Updated: 2022/05/07 15:25:56 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,16 @@ static void	check_num_rgb(t_vars *vars, char *line, char **rgb, int i)
 
 static void	get_color_floor_ceil(t_vars *vars, char *line, char **rgb)
 {
-	int	color;
-	int	i;
+	int		color;
+	int		i;
+	char	*croped;
 
 	i = 0;
 	while (rgb[i])
 	{
+		croped = ft_strtrim(rgb[i], " ");
+		free(rgb[i]);
+		rgb[i] = croped;
 		check_num_rgb(vars, line, rgb, i);
 		i++;
 	}
@@ -55,7 +59,7 @@ int	import_colors(t_vars *vars, char *line)
 
 	if ((line[0] == 'F' || line[0] == 'C'))
 	{
-		val = ft_strrchr(line, ' ');
+		val = ft_strchr(line, ' ');
 		if (!val)
 		{
 			free(line);
